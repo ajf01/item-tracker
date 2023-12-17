@@ -25,6 +25,9 @@ yarn-error.log*
 #Virtural Environment
 myenv/
 
+#Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
 #React Packages
 node_modules/
 scripts/
