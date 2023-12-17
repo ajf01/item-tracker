@@ -26,7 +26,7 @@ yarn-error.log*
 myenv/
 
 #Jupyter Notebook Checkpoints
-.ipynb_checkpoints/
+.ipynb_checkpoints
 
 #React Packages
 node_modules/
