@@ -28,6 +28,9 @@ myenv/
 #Jupyter Notebook Checkpoints
 .ipynb_checkpoints
 
+#Firebase Keys
+/src/firebase.js
+
 #React Packages
 node_modules/
 scripts/
