@@ -30,6 +30,7 @@ myenv/
 
 #Firebase Keys
 /src/firebase.js
+/server/admin.json
 
 #React Packages
 node_modules/

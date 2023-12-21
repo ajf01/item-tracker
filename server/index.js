@@ -1,3 +1,18 @@
+{/*const firestore = require("../src/firebase.js");
+const { addDoc, collection } = require("@firebase/firestore");*/}
+
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getFirestore, addDoc, collection } = require('firebase-admin/firestore');
+require('firebase/auth');
+require('firebase/database');
+
+const fireApp = initializeApp({
+    credential: cert(require('./admin.json'))
+});
+const database = getFirestore(fireApp);
+{/*const ref = collection(firestore, "auth");*/}
+const docRef = database.collection('users');
+
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -43,6 +58,14 @@ app.post("/api/register", async (req, res) => {
 
 	if (result.length === 0) {
 		const newUser = { id, email, password, username };
+
+        {/*addDoc(ref, {"ID": id, "Email": email, "Password": password, "Username": username});*/}
+        await docRef.doc("Happy").set({
+            "ID": id,
+            "Email": email,
+            "Password": password,
+            "Username": username
+        });
 
 		users.push(newUser);
 		return res.json({

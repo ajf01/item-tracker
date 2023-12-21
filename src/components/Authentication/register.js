@@ -8,7 +8,7 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const ref = collection(firestore, "register");
+    const ref = collection(firestore, "auth");
 
     const signUp = () => {
 		fetch("http://localhost:4000/api/register", {
