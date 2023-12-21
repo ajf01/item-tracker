@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { firestore } from "../../firebase.js";
-import { addDoc, collection } from "@firebase/firestore";
+{/*import { firestore } from "../../firebase.js";
+import { addDoc, collection } from "@firebase/firestore";*/}
 
 const Register = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const ref = collection(firestore, "auth");
+    {/*const ref = collection(firestore, "auth");*/}
 
     const signUp = () => {
 		fetch("http://localhost:4000/api/register", {
@@ -40,7 +40,7 @@ const Register = () => {
         setEmail("");
         setUsername("");
         setPassword("");
-        addDoc(ref, {"Email": email, "Username": username, "Password": password});
+        {/*addDoc(ref, {"Email": email, "Username": username, "Password": password});*/}
     };
     return (
         <main className='register'>

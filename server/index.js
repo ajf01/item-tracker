@@ -5,7 +5,6 @@ const { initializeApp, cert } = require('firebase-admin/app');
 const { getFirestore, addDoc, collection } = require('firebase-admin/firestore');
 require('firebase/auth');
 require('firebase/database');
-
 const fireApp = initializeApp({
     credential: cert(require('./admin.json'))
 });
@@ -29,38 +28,56 @@ let currentUser = null;
 
 const generateID = () => Math.random().toString(36).substring(2, 10);
 
-app.post("/api/login", (req, res) => {
+app.post("/api/login", async (req, res) => {
 	const { email, password } = req.body;
-	let result = users.filter(
+	{/*let result = users.filter(
 		(user) => user.email === email && user.password === password
-	);
+    );*/}
 
-	if (result.length !== 1) {
+    let exists = true;
+    const snapshot = await database.collection('users').get();
+    snapshot.forEach((doc) => {
+        if (doc.id === email){
+            if (doc.data().Password === password){
+                exists = false;
+            }
+        }
+    });
+
+	{/*if (result.length !== 1) {*/}
+    if (exists) {
 		return res.json({
 			error_message: "Incorrect credentials",
 		});
 	}
 
-    currentUser = result[0].username;
+    {/*currentUser = result[0].username;*/}
 
 	res.json({
 		message: "Login successfully",
-		id: result[0].id,
 	});
 });
 
 app.post("/api/register", async (req, res) => {
 	const { email, password, username } = req.body;
 	const id = generateID();
-	const result = users.filter(
+	{/*const result = users.filter(
 		(user) => user.email === email && user.password === password
-	);
+    );*/}
+    let exists = false;
+    const snapshot = await database.collection('users').get();
+    snapshot.forEach((doc) => {
+        if (doc.id === email){
+            exists = true;
+        }
+    });
 
-	if (result.length === 0) {
+	{/*if (result.length === 0) {*/}
+    if (!exists) {
 		const newUser = { id, email, password, username };
 
         {/*addDoc(ref, {"ID": id, "Email": email, "Password": password, "Username": username});*/}
-        await docRef.doc("Happy").set({
+        await docRef.doc(email).set({
             "ID": id,
             "Email": email,
             "Password": password,

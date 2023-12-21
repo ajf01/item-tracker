@@ -6,7 +6,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-
     const loginUser = () => {
 		fetch("http://localhost:4000/api/login", {
 			method: "POST",
@@ -25,7 +24,7 @@ const Login = () => {
 				} else {
 					alert(data.message);
 					navigate("/dashboard");
-					localStorage.setItem("_id", data.id);
+					{/*localStorage.setItem("_id", data.id);*/}
 				}
 			})
 			.catch((err) => console.error(err));
